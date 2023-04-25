@@ -1,0 +1,25 @@
+version: "3.4"
+
+services:
+  py:
+    container_name: py
+    build: py
+    volumes:
+      - ./py:/root/app
+    environment:
+      TZ: $TZ
+      OP_CONNECT_TOKEN: $OP_CONNECT_TOKEN
+      VAULT_ID: $VAULT_ID
+
+  op-connect-api:
+    container_name: op-connect-api
+    image: 1password/connect-api:latest
+    volumes:
+      - "./1password-credentials.json:/home/opuser/.op/1password-credentials.json"
+      - "./data:/home/opuser/.op/data"
+
+  op-connect-sync:
+    image: 1password/connect-sync:latest
+    volumes:
+      - "./1password-credentials.json:/home/opuser/.op/1password-credentials.json"
+      - "./data:/home/opuser/.op/data"
