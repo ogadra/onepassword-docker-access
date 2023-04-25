@@ -39,13 +39,11 @@ item_id = created_item.id
 sleep(2)
 
 # get Item
-
 get_item = client.get_item(item_id, os.environ["VAULT_ID"])
 print('got', get_item)
 sleep(2)
 
 # update item
-
 update_item = get_item
 update_item.fields[1].value = pass_gen()
 
